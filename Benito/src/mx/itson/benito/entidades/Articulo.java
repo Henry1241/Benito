@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 /**
@@ -26,6 +27,7 @@ public class Articulo {
     private String nombre;
     private double precio;
     @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idProveedor")
     private Proveedor idProveedor;
 
     /**
