@@ -14,9 +14,9 @@ import java.util.Date;
 public class OrdenCompra {
     
     private int id;
-    private int idProveedor;
+    private Proveedor idProveedor;
     private String folio;
-    private int idArticulo;
+    private Articulo idArticulo;
     private double subtotal;
     private Date fecha;
 
@@ -37,14 +37,14 @@ public class OrdenCompra {
     /**
      * @return the idProveedor
      */
-    public int getIdProveedor() {
+    public Proveedor getIdProveedor() {
         return idProveedor;
     }
 
     /**
      * @param idProveedor the idProveedor to set
      */
-    public void setIdProveedor(int idProveedor) {
+    public void setIdProveedor(Proveedor idProveedor) {
         this.idProveedor = idProveedor;
     }
 
@@ -65,14 +65,14 @@ public class OrdenCompra {
     /**
      * @return the idArticulo
      */
-    public int getIdArticulo() {
+    public Articulo getIdArticulo() {
         return idArticulo;
     }
 
     /**
      * @param idArticulo the idArticulo to set
      */
-    public void setIdArticulo(int idArticulo) {
+    public void setIdArticulo(Articulo idArticulo) {
         this.idArticulo = idArticulo;
     }
 

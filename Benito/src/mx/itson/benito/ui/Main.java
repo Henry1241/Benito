@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package benito;
+package mx.itson.benito.ui;
 
 /**
  *
  * @author enri0
  */
-public class Benito {
+public class Main {
 
     /**
      * @param args the command line arguments
