@@ -5,12 +5,20 @@
  */
 package mx.itson.benito.entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author enri0
  */
+@Entity
 public class Proveedor {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String clave;
     private String nombre;

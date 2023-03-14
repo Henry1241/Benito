@@ -5,16 +5,27 @@
  */
 package mx.itson.benito.entidades;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author enri0
  */
+@Entity
 public class Articulo {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String clave;
     private String nombre;
     private double precio;
+    @OneToMany(cascade = CascadeType.MERGE)
     private Proveedor idProveedor;
 
     /**
