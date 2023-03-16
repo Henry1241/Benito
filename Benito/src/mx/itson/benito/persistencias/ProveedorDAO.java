@@ -31,7 +31,7 @@ public class ProveedorDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             CriteriaQuery<Proveedor> criteriaQuery = 
                     session.getCriteriaBuilder().createQuery(Proveedor.class);
-            criteriaQuery.from(Articulo.class);
+            criteriaQuery.from(Proveedor.class);
             
             proveedores = session.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {

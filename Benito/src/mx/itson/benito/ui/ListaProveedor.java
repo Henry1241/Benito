@@ -5,6 +5,11 @@
  */
 package mx.itson.benito.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.benito.entidades.Proveedor;
+import mx.itson.benito.persistencias.ProveedorDAO;
+
 /**
  *
  * @author enri0
@@ -28,14 +33,19 @@ public class ListaProveedor extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProveedor = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -54,7 +64,7 @@ public class ListaProveedor extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProveedor);
 
         jButton1.setText("Agregar");
 
@@ -94,6 +104,31 @@ public class ListaProveedor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        cargar();
+        
+        tblProveedor.removeColumn(tblProveedor.getColumnModel().getColumn(0));
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cargar() {
+        List<Proveedor> proveedor = ProveedorDAO.obtenerTodos();
+        DefaultTableModel model = (DefaultTableModel) tblProveedor.getModel();
+        model.setRowCount(0);
+        for (Proveedor p : proveedor) {
+            model.addRow(new Object[]{
+                p.getId(),
+                p.getClave(),
+                p.getNombre(),
+                p.getDireccion(),
+                p.getTelefono(),
+                p.getEmail(),
+                p.getContacto(),
+                p.getArticulo()
+            });
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -135,6 +170,6 @@ public class ListaProveedor extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblProveedor;
     // End of variables declaration//GEN-END:variables
 }
