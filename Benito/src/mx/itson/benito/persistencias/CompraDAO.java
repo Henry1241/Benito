@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-import mx.itson.benito.entidades.OrdenCompra;
+import mx.itson.benito.entidades.Articulo;
+import mx.itson.benito.entidades.Compra;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -18,56 +20,58 @@ import org.hibernate.Session;
  *
  * @author enri0
  */
-public class OrdenCompraDAO {
+public class CompraDAO {
     
     /**
      * Conecta con Hibernate y con la base de datos MySQL para obtener datos de
      * la base de datos especifica
      *
-     * @return conductores
+     * @return compra
      */
-    public static List<OrdenCompra> obtenerTodos() {
-        List<OrdenCompra> ordenCompra = new ArrayList<>();
+    public static List<Compra> obtenerTodos() {
+        List<Compra> compra = new ArrayList<>();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            CriteriaQuery<OrdenCompra> criteriaQuery
-                    = session.getCriteriaBuilder().createQuery(OrdenCompra.class);
-            criteriaQuery.from(OrdenCompra.class);
+            CriteriaQuery<Compra> criteriaQuery
+                    = session.getCriteriaBuilder().createQuery(Compra.class);
+            criteriaQuery.from(Compra.class);
 
-            ordenCompra = session.createQuery(criteriaQuery).getResultList();
+            compra = session.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             System.err.println("Ocurrio un error" + ex.getMessage());
         }
-        return ordenCompra;
+        return compra;
     }
 
-    public static boolean guardar(String folio, double subtotal, Date fecha) {
+    public static boolean guardar(Proveedor idProveedor, String folio, Articulo idArticulo, double subtotal, Date fecha) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            OrdenCompra o = new OrdenCompra();
-            o.setFolio(folio);
-            o.setSubtotal(subtotal);
-            o.setFecha(fecha);
+            Compra c = new Compra();
+            c.setIdProveedor(idProveedor);
+            c.setFolio(folio);
+            c.setIdArticulo(idArticulo);
+            c.setSubtotal(subtotal);
+            c.setFecha(fecha);
 
-            session.save(o);
+            session.save(c);
 
             session.getTransaction().commit();
 
-            resultado = o.getId() != 0;
+            resultado = c.getId() != 0;
         } catch (Exception ex) {
             System.err.println("Ocurrio un error" + ex.getMessage());
         }
         return resultado;
     }
 
-    public static OrdenCompra obtenerPorId(int id) {
-        OrdenCompra ordenCompra = null;
+    public static Compra obtenerPorId(int id) {
+        Compra ordenCompra = null;
         try {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            ordenCompra = session.get(OrdenCompra.class, id);
+            ordenCompra = session.get(Compra.class, id);
         } catch (HibernateException ex) {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }

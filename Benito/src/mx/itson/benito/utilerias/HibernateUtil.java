@@ -29,7 +29,7 @@ public class HibernateUtil {
             configuration.configure();
             factory = configuration.buildSessionFactory();
         }catch(HibernateException ex){
-                System.out.println("No se pudo crear la sesión de Hibernate debido al error: "+ex);
+                System.out.println("No se pudo crear la sesión de Hibernate debido al error: " + ex);
         }
     }
 

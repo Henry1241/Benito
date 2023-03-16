@@ -23,9 +23,9 @@
         <property name="hibernate.current_session_context_class">thread
         </property>
         
-        <mapping class="mx.itson.philadelphia.entidades.OrdenCompra"/>
-        <mapping class="mx.itson.philadelphia.entidades.Proveedor"/>
-        <mapping class="mx.itson.philadelphia.entidades.Articulo"/>
+        <mapping class="mx.itson.benito.entidades.Compra"/>
+        <mapping class="mx.itson.benito.entidades.Proveedor"/>
+        <mapping class="mx.itson.benito.entidades.Articulo"/>
     </session-factory> 
     
 </hibernate-configuration>

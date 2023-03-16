@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Articulo {
     private String clave;
     private String nombre;
     private double precio;
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "idProveedor")
     private Proveedor idProveedor;
 

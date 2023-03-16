@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  * @author enri0
  */
 @Entity
-public class OrdenCompra {
+public class Compra {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,8 @@ public class OrdenCompra {
     @JoinColumn(name = "idProveedor")
     private Proveedor idProveedor;
     private String folio;
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idAtriculo")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idArticulo")
     private Articulo idArticulo;
     private double subtotal;
     @Temporal(TemporalType.DATE)

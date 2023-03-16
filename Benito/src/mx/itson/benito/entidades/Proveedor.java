@@ -31,7 +31,7 @@ public class Proveedor {
     private String email;
     private String contacto;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idAtriculo")
+    @JoinColumn(name = "idArticulos")
     private List<Articulo> articulos; 
 
     /**

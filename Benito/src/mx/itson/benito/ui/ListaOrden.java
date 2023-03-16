@@ -5,6 +5,13 @@
  */
 package mx.itson.benito.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.benito.entidades.Compra;
+import mx.itson.benito.persistencias.CompraDAO;
+
 /**
  *
  * @author enri0
@@ -32,6 +39,11 @@ public class ListaOrden extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,6 +86,29 @@ public class ListaOrden extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        cargar();
+        
+        tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
+    }//GEN-LAST:event_formWindowOpened
+
+    public void cargar() {
+        List<Compra> orden = CompraDAO.obtenerTodos();
+        DefaultTableModel model = (DefaultTableModel) tblOrden.getModel();
+        model.setRowCount(0);
+        DateFormat formatoFecha = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
+        for (Compra o : orden) {
+            model.addRow(new Object[]{
+                o.getId(),
+                o.getIdProveedor().getNombre(),
+                o.getFolio(),
+                o.getIdArticulo().getNombre(),
+                o.getSubtotal(),
+                formatoFecha.format(o.getFecha())  
+            });
+            }
+    }
     /**
      * @param args the command line arguments
      */
