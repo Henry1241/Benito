@@ -51,7 +51,7 @@ public class ProveedorDAO {
      * @param articulos
      * @return resultado
      */
-    public static boolean guardar(String clave, String nombre, String direccion, String telefono, String email, String contacto, List<Articulo> articulos){
+    public static boolean guardar(String clave, String nombre, String direccion, String telefono, String email, String contacto, Articulo articulo){
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -64,7 +64,7 @@ public class ProveedorDAO {
             p.setTelefono(telefono);
             p.setEmail(email);
             p.setContacto(contacto);
-            p.setArticulos(articulos);
+            p.setArticulo(articulo);
             
             session.save(p);
             
@@ -100,10 +100,10 @@ public class ProveedorDAO {
      * @param telefono
      * @param email
      * @param contacto
-     * @param articulos
+     * @param articulo
      * @return resultado
      */
-    public static boolean editar(int id, String clave, String nombre, String direccion, String telefono, String email, String contacto, List<Articulo> articulos){
+    public static boolean editar(int id, String clave, String nombre, String direccion, String telefono, String email, String contacto, Articulo articulo){
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -117,7 +117,7 @@ public class ProveedorDAO {
                 proveedor.setTelefono(telefono);
                 proveedor.setEmail(email);
                 proveedor.setContacto(contacto);
-                proveedor.setArticulos(articulos);
+                proveedor.setArticulo(articulo);
                 
                 session.saveOrUpdate(proveedor);              
                 session.getTransaction().commit();
@@ -140,7 +140,7 @@ public class ProveedorDAO {
             session.beginTransaction();
             
             Proveedor proveedor = obtenerPorId(id);
-            proveedor.getArticulos().get(id);
+            proveedor.getArticulo().getId();
             
             if(proveedor != null){
                 session.delete(proveedor);

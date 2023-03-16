@@ -5,23 +5,21 @@
  */
 package mx.itson.benito.ui;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import mx.itson.benito.entidades.Compra;
-import mx.itson.benito.persistencias.CompraDAO;
+import mx.itson.benito.entidades.Articulo;
+import mx.itson.benito.persistencias.ArticuloDAO;
 
 /**
  *
  * @author enri0
  */
-public class ListaOrden extends javax.swing.JFrame {
+public class ListaArticulo extends javax.swing.JFrame {
 
     /**
-     * Creates new form ListaOrden
+     * Creates new form ListaArticulo
      */
-    public ListaOrden() {
+    public ListaArticulo() {
         initComponents();
     }
 
@@ -35,8 +33,10 @@ public class ListaOrden extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblOrden = new javax.swing.JTable();
-        btnAgregar = new javax.swing.JButton();
+        tblArticulos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -45,49 +45,62 @@ public class ListaOrden extends javax.swing.JFrame {
             }
         });
 
-        tblOrden.setModel(new javax.swing.table.DefaultTableModel(
+        tblArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "id", "Proveedor", "Folio", "Articulo", "Subtotal", "Fecha"
+                "id", "Clave", "Nombre", "Precio", "Proveedor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblOrden);
+        jScrollPane1.setViewportView(tblArticulos);
 
-        btnAgregar.setText("Agregar");
+        jButton1.setText("Agregar");
+
+        jButton2.setText("Editar");
+
+        jButton3.setText("Eiminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregar)))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAgregar)
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(53, 53, 53)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,25 +110,24 @@ public class ListaOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
         cargar();
         
-        tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
+        tblArticulos.removeColumn(tblArticulos.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
     public void cargar() {
-        List<Compra> orden = CompraDAO.obtenerTodos();
-        DefaultTableModel model = (DefaultTableModel) tblOrden.getModel();
+        List<Articulo> articulo = ArticuloDAO.obtenerTodos();
+        DefaultTableModel model = (DefaultTableModel) tblArticulos.getModel();
         model.setRowCount(0);
-        DateFormat formatoFecha = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
-        for (Compra o : orden) {
+        for(Articulo a: articulo){
             model.addRow(new Object[]{
-                o.getId(),
-                o.getIdProveedor().getNombre(),
-                o.getFolio(),
-                o.getIdArticulo().getNombre(),
-                o.getSubtotal(),
-                formatoFecha.format(o.getFecha())  
+                a.getId(),
+                a.getClave(),
+                a.getNombre(),
+                a.getPrecio(),
+                a.getIdProveedor()
             });
-            }
+        }
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -133,27 +145,29 @@ public class ListaOrden extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaOrden().setVisible(true);
+                new ListaArticulo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblOrden;
+    private javax.swing.JTable tblArticulos;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,14 +5,13 @@
  */
 package mx.itson.benito.entidades;
 
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -30,9 +29,9 @@ public class Proveedor {
     private String telefono;
     private String email;
     private String contacto;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idArticulos")
-    private List<Articulo> articulos; 
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idArticulo")
+    private Articulo articulo; 
 
     /**
      * @return the id
@@ -139,14 +138,14 @@ public class Proveedor {
     /**
      * @return the articulos
      */
-    public List<Articulo> getArticulos() {
-        return articulos;
+    public Articulo getArticulo() {
+        return articulo;
     }
 
     /**
      * @param articulos the articulos to set
      */
-    public void setArticulos(List<Articulo> articulos) {
-        this.articulos = articulos;
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
     }
 }
