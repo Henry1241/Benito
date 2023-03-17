@@ -49,7 +49,7 @@ public class ArticuloDAO {
      * @param Proveedor
      * @return resultado
      */
-    public static boolean guardar(String clave, String nombre, double precio, Proveedor Proveedor){
+    public static boolean guardar(String clave, String nombre, double precio, Proveedor proveedor){
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -59,7 +59,7 @@ public class ArticuloDAO {
             a.setClave(clave);
             a.setNombre(nombre);
             a.setPrecio(precio);
-            a.setIdProveedor(Proveedor);
+            a.setIdProveedor(proveedor);
             
             session.save(a);
             
@@ -129,7 +129,7 @@ public class ArticuloDAO {
             session.beginTransaction();
             
             Articulo articulo = obtenerPorId(id);
-            articulo.getIdProveedor().getId();
+            articulo.getId();
             
             if(articulo != null){
                 session.delete(articulo);
