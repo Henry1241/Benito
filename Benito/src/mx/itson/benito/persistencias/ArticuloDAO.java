@@ -142,4 +142,16 @@ public class ArticuloDAO {
         }
         return resultado;
     }
+    
+    public static double sumaPrecio(Articulo subtotal) {
+        double total = 0;
+
+        Articulo articulo = subtotal;
+            if(articulo != null){
+                articulo.setPrecio(total);
+            }
+                total += subtotal.getPrecio();
+            
+        return total;
+    }
 }

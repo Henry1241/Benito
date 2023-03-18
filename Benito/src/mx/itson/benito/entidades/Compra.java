@@ -6,13 +6,15 @@
 package mx.itson.benito.entidades;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,10 +33,11 @@ public class Compra {
     @JoinColumn(name = "idProveedor")
     private Proveedor idProveedor;
     private String folio;
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idArticulo")
-    private Articulo idArticulo;
-    private double subtotal;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "rel_compra_articulo",
+            joinColumns = {@JoinColumn(name = "idCompra")},
+            inverseJoinColumns = {@JoinColumn(name = "idArticulo")})
+    private List<Articulo> idArticulo;
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
@@ -83,29 +86,15 @@ public class Compra {
     /**
      * @return the idArticulo
      */
-    public Articulo getIdArticulo() {
+    public List<Articulo> getIdArticulo() {
         return idArticulo;
     }
 
     /**
      * @param idArticulo the idArticulo to set
      */
-    public void setIdArticulo(Articulo idArticulo) {
+    public void setIdArticulo(List<Articulo> idArticulo) {
         this.idArticulo = idArticulo;
-    }
-
-    /**
-     * @return the subtotal
-     */
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    /**
-     * @param subtotal the subtotal to set
-     */
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
     }
 
     /**

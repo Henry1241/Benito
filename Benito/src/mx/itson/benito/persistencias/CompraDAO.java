@@ -43,7 +43,7 @@ public class CompraDAO {
         return compra;
     }
 
-    public static boolean guardar(Proveedor idProveedor, String folio, Articulo idArticulo, double subtotal, Date fecha) {
+    public static boolean guardar(Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -53,7 +53,6 @@ public class CompraDAO {
             c.setIdProveedor(idProveedor);
             c.setFolio(folio);
             c.setIdArticulo(idArticulo);
-            c.setSubtotal(subtotal);
             c.setFecha(fecha);
 
             session.save(c);
