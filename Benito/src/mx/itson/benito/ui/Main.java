@@ -5,6 +5,8 @@
  */
 package mx.itson.benito.ui;
 
+import mx.itson.benito.persistencias.RelacionDAO;
+
 /**
  *
  * @author enri0
@@ -16,6 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        RelacionDAO.obtenerTodos();
     }
     
 }

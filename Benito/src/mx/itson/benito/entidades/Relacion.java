@@ -5,7 +5,6 @@
  */
 package mx.itson.benito.entidades;
 
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,31 +14,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author enri0
  */
 @Entity
-public class Compra {
-    
+public class Relacion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idProveedor")
-    private Proveedor idProveedor;
-    private String folio;
+    @JoinColumn(name = "idCompra")
+    private Compra idCompra;
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "compra",
-            joinColumns = {@JoinColumn(name = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "idArticulo")})
+    @JoinTable(name = "relacion",
+            joinColumns = {
+                @JoinColumn(name = "idCompra")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idArticulo")})
     private List<Articulo> idArticulo;
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
     private int cantidad;
 
     /**
@@ -57,31 +54,17 @@ public class Compra {
     }
 
     /**
-     * @return the idProveedor
+     * @return the Compra
      */
-    public Proveedor getIdProveedor() {
-        return idProveedor;
+    public Compra getIdCompra() {
+        return idCompra;
     }
 
     /**
-     * @param idProveedor the idProveedor to set
+     * @param idCompra the idCompra to set
      */
-    public void setIdProveedor(Proveedor idProveedor) {
-        this.idProveedor = idProveedor;
-    }
-
-    /**
-     * @return the folio
-     */
-    public String getFolio() {
-        return folio;
-    }
-
-    /**
-     * @param folio the folio to set
-     */
-    public void setFolio(String folio) {
-        this.folio = folio;
+    public void setCompra(Compra idCompra) {
+        this.idCompra = idCompra;
     }
 
     /**
@@ -94,36 +77,22 @@ public class Compra {
     /**
      * @param idArticulo the idArticulo to set
      */
-    public void setIdArticulo(List<Articulo> idArticulo) {
+    public void setArticulo(List<Articulo> idArticulo) {
         this.idArticulo = idArticulo;
     }
 
     /**
-     * @return the fecha
+     * @return the cantindad
      */
-    public Date getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    /**
-     * @return the cantidad
-     */
-    public int getCantidad() {
+    public int getCantindad() {
         return cantidad;
     }
 
     /**
      * @param cantidad the cantidad to set
      */
-    public void setCantidad(int cantidad) {
+    public void setCantindad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
 }

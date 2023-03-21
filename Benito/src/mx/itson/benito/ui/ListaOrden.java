@@ -13,8 +13,10 @@ import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Compra;
+import mx.itson.benito.entidades.Relacion;
 import mx.itson.benito.persistencias.ArticuloDAO;
 import mx.itson.benito.persistencias.CompraDAO;
+import mx.itson.benito.persistencias.RelacionDAO;
 
 /**
  *
@@ -53,17 +55,17 @@ public class ListaOrden extends javax.swing.JFrame {
 
         tblOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Proveedor", "Folio", "Articulo", "Fecha", "SubTotal", "Total"
+                "id", "Proveedor", "Folio", "Articulo", "Fecha", "Cantidad", "SubTotal", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -161,10 +163,14 @@ public class ListaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     public void cargar() {
+        Relacion relacion = new Relacion();
+        int posicion = 0;
+        int cantidad = 0;
         double subtotal = 0.0;
         double iva = 0.0;
         double total;
         List<Compra> orden = CompraDAO.obtenerTodos();
+        posicion = relacion.getId();
         subtotal += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio();
         iva += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*0.16;
         total = subtotal + iva;
@@ -178,8 +184,9 @@ public class ListaOrden extends javax.swing.JFrame {
                 o.getId(),
                 o.getIdProveedor().getNombre(),
                 o.getFolio(),
-                o.getIdArticulo(),
+                o.getIdArticulo().get(NORMAL).getNombre(),
                 formatoFecha.format(o.getFecha()),
+                o.getClass(),
                 formatoMoneda.format(subtotal),
                 formatoMoneda.format(total)
             });      
