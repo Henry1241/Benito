@@ -76,4 +76,46 @@ public class CompraDAO {
         }
         return ordenCompra;
     }
+    public static boolean editar(int id, Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha){
+        boolean resultado = false;
+        try {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            
+            Compra compra = obtenerPorId(id);
+            if(compra != null){
+                compra.setIdProveedor(idProveedor);
+                compra.setFolio(folio);
+                compra.setIdArticulo(idArticulo);
+                compra.setFecha(fecha);
+                
+                session.saveOrUpdate(compra);              
+                session.getTransaction().commit();
+                resultado = true;
+            }
+        } catch (HibernateException ex) {
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return resultado;
+    }
+    public static boolean eliminar(int id){
+        boolean resultado = false;
+        try {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            
+            Compra compra = obtenerPorId(id);
+            compra.getId();
+            
+            if(compra != null){
+                session.delete(compra);
+                HibernateUtil.getSessionFactory().getCurrentSession().delete(compra);
+                session.getTransaction().commit();
+                resultado = true;
+            }
+        } catch (HibernateException ex) {
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return resultado;
+    }
 }

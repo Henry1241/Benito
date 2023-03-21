@@ -80,8 +80,18 @@ public class ListaOrden extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,12 +135,35 @@ public class ListaOrden extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+        FormularioOrden formulario = new FormularioOrden(this, true, 0);
+        formulario.setVisible(true);
+        
+        cargar();
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        int renglon = tblOrden.getSelectedRow();
+        int id = Integer.parseInt(tblOrden.getModel().getValueAt(renglon, 0).toString());
+        
+        CompraDAO.eliminar(id);
+        cargar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int renglon = tblOrden.getSelectedRow();
+        int id = Integer.parseInt(tblOrden.getModel().getValueAt(renglon, 0).toString());
+        
+        FormularioOrden formulario = new FormularioOrden(this, true, id);
+        formulario.setVisible(true);
+        cargar();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     public void cargar() {
         double subtotal = 0.0;
         double iva = 0.0;
-        double total = 0.0;
+        double total;
         List<Compra> orden = CompraDAO.obtenerTodos();
         subtotal += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio();
         iva += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*0.16;
