@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -37,7 +36,6 @@ public class Relacion {
             inverseJoinColumns = {
                 @JoinColumn(name = "idArticulo")})
     private List<Articulo> idArticulo;
-    private int cantidad;
 
     /**
      * @return the id
@@ -80,19 +78,4 @@ public class Relacion {
     public void setArticulo(List<Articulo> idArticulo) {
         this.idArticulo = idArticulo;
     }
-
-    /**
-     * @return the cantindad
-     */
-    public int getCantindad() {
-        return cantidad;
-    }
-
-    /**
-     * @param cantidad the cantidad to set
-     */
-    public void setCantindad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
 }

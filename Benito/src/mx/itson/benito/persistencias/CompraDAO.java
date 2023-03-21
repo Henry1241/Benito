@@ -43,7 +43,7 @@ public class CompraDAO {
         return compra;
     }
 
-    public static boolean guardar(Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha) {
+    public static boolean guardar(Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha, int cantidad) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -54,6 +54,7 @@ public class CompraDAO {
             c.setFolio(folio);
             c.setIdArticulo(idArticulo);
             c.setFecha(fecha);
+            c.setCantidad(cantidad);
 
             session.save(c);
 
@@ -76,7 +77,7 @@ public class CompraDAO {
         }
         return ordenCompra;
     }
-    public static boolean editar(int id, Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha){
+    public static boolean editar(int id, Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha, int cantidad){
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -88,6 +89,7 @@ public class CompraDAO {
                 compra.setFolio(folio);
                 compra.setIdArticulo(idArticulo);
                 compra.setFecha(fecha);
+                compra.setCantidad(cantidad);
                 
                 session.saveOrUpdate(compra);              
                 session.getTransaction().commit();

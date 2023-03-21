@@ -163,16 +163,12 @@ public class ListaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     public void cargar() {
-        Relacion relacion = new Relacion();
-        int posicion = 0;
-        int cantidad = 0;
         double subtotal = 0.0;
         double iva = 0.0;
         double total;
         List<Compra> orden = CompraDAO.obtenerTodos();
-        posicion = relacion.getId();
-        subtotal += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio();
-        iva += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*0.16;
+        subtotal += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*orden.get(NORMAL).getCantidad();
+        iva += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*0.16*(orden.get(NORMAL).getCantidad());
         total = subtotal + iva;
         DefaultTableModel model = (DefaultTableModel) tblOrden.getModel();
         model.setRowCount(0);
@@ -186,7 +182,7 @@ public class ListaOrden extends javax.swing.JFrame {
                 o.getFolio(),
                 o.getIdArticulo().get(NORMAL).getNombre(),
                 formatoFecha.format(o.getFecha()),
-                o.getClass(),
+                o.getCantidad(),
                 formatoMoneda.format(subtotal),
                 formatoMoneda.format(total)
             });      

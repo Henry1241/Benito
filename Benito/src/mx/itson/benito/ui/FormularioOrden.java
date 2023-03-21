@@ -77,6 +77,8 @@ public class FormularioOrden extends javax.swing.JDialog {
         txtFecha = new javax.swing.JTextField();
         cmbArticulo = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
+        spnCantidad = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,26 +97,31 @@ public class FormularioOrden extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setText("Cantidad");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFolio)
-                    .addComponent(txtFecha)
-                    .addComponent(cmbArticulo, 0, 280, Short.MAX_VALUE))
-                .addContainerGap(105, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(spnCantidad)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(cmbProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFolio)
+                        .addComponent(txtFecha)
+                        .addComponent(cmbArticulo, 0, 280, Short.MAX_VALUE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +142,13 @@ public class FormularioOrden extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addComponent(btnGuardar)
-                .addGap(173, 173, 173))
+                .addGap(117, 117, 117))
         );
 
         pack();
@@ -150,11 +161,12 @@ public class FormularioOrden extends javax.swing.JDialog {
             String folio = txtFolio.getText();
             List<Articulo> idArticulo = (List<Articulo>) (Articulo) cmbArticulo.getSelectedItem();
             Date fecha = new SimpleDateFormat("yyyy MM, d", Locale.ENGLISH).parse(txtFecha.getText());
+            int cantidad = (int) spnCantidad.getValue();
             
              boolean resultado = this.id == 0 ?
             
-            CompraDAO.guardar(proveedor, folio, idArticulo, fecha):
-            CompraDAO.editar(id, proveedor, folio, idArticulo, fecha);
+            CompraDAO.guardar(proveedor, folio, idArticulo, fecha, cantidad):
+            CompraDAO.editar(id, proveedor, folio, idArticulo, fecha, cantidad);
             
         if(resultado){
             JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
@@ -216,6 +228,8 @@ public class FormularioOrden extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSpinner spnCantidad;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFolio;
     // End of variables declaration//GEN-END:variables
