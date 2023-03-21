@@ -41,8 +41,8 @@ public class ListaOrden extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrden = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,10 +73,15 @@ public class ListaOrden extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblOrden);
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Editar");
+        btnEditar.setText("Editar");
 
-        jButton2.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,9 +94,9 @@ public class ListaOrden extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(btnEditar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnEliminar)
                         .addGap(3, 3, 3)))
                 .addContainerGap())
         );
@@ -101,8 +106,8 @@ public class ListaOrden extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar))
                 .addGap(50, 50, 50)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(205, Short.MAX_VALUE))
@@ -118,10 +123,18 @@ public class ListaOrden extends javax.swing.JFrame {
         tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
     public void cargar() {
         double subtotal = 0.0;
+        double iva = 0.0;
+        double total = 0.0;
         List<Compra> orden = CompraDAO.obtenerTodos();
         subtotal += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio();
+        iva += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*0.16;
+        total = subtotal + iva;
         DefaultTableModel model = (DefaultTableModel) tblOrden.getModel();
         model.setRowCount(0);
         DateFormat formatoFecha = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
@@ -134,7 +147,8 @@ public class ListaOrden extends javax.swing.JFrame {
                 o.getFolio(),
                 o.getIdArticulo(),
                 formatoFecha.format(o.getFecha()),
-                formatoMoneda.format(subtotal)
+                formatoMoneda.format(subtotal),
+                formatoMoneda.format(total)
             });      
         }
     }
@@ -175,8 +189,8 @@ public class ListaOrden extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrden;
     // End of variables declaration//GEN-END:variables
