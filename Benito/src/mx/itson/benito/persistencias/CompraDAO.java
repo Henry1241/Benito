@@ -43,7 +43,7 @@ public class CompraDAO {
         return compra;
     }
 
-    public static boolean guardar(Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha, int cantidad) {
+    public static boolean guardar(Proveedor idProveedor, String folio, Articulo idArticulo, Date fecha, int cantidad) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -52,7 +52,7 @@ public class CompraDAO {
             Compra c = new Compra();
             c.setIdProveedor(idProveedor);
             c.setFolio(folio);
-            c.setIdArticulo(idArticulo);
+            c.setIdArticulo((List<Articulo>) idArticulo);
             c.setFecha(fecha);
             c.setCantidad(cantidad);
 
@@ -77,7 +77,7 @@ public class CompraDAO {
         }
         return ordenCompra;
     }
-    public static boolean editar(int id, Proveedor idProveedor, String folio, List<Articulo> idArticulo, Date fecha, int cantidad){
+    public static boolean editar(int id, Proveedor idProveedor, String folio, Articulo idArticulo, Date fecha, int cantidad){
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -87,7 +87,7 @@ public class CompraDAO {
             if(compra != null){
                 compra.setIdProveedor(idProveedor);
                 compra.setFolio(folio);
-                compra.setIdArticulo(idArticulo);
+                compra.setIdArticulo((List<Articulo>) idArticulo);
                 compra.setFecha(fecha);
                 compra.setCantidad(cantidad);
                 
@@ -119,5 +119,16 @@ public class CompraDAO {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
         return resultado;
+    }
+    
+    public static Articulo obtenerPorIdArticulo(int id) {
+        Articulo articuloNombre = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            articuloNombre = session.get(Articulo.class, id);
+        } catch (HibernateException ex) {
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return articuloNombre;
     }
 }

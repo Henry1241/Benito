@@ -74,9 +74,9 @@
                 <Column editable="true" title="id" type="java.lang.Integer"/>
                 <Column editable="true" title="Proveedor" type="java.lang.Object"/>
                 <Column editable="true" title="Folio" type="java.lang.Object"/>
-                <Column editable="true" title="Articulo" type="java.lang.Object"/>
                 <Column editable="true" title="Fecha" type="java.lang.Object"/>
                 <Column editable="true" title="Cantidad" type="java.lang.Object"/>
+                <Column editable="true" title="Articulo" type="java.lang.Object"/>
                 <Column editable="true" title="SubTotal" type="java.lang.Object"/>
                 <Column editable="true" title="Total" type="java.lang.Object"/>
               </Table>

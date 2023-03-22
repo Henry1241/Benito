@@ -46,7 +46,7 @@ public class ArticuloDAO {
      * @param clave
      * @param nombre
      * @param precio
-     * @param Proveedor
+     * @param proveedor
      * @return resultado
      */
     public static boolean guardar(String clave, String nombre, double precio, Proveedor proveedor){

@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/ui/FormularioArticulo.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/ui/ListaOrden.java</file>
+            <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/entidades/Relacion.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/persistencias/ProveedorDAO.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/ui/FormularioProveedor.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/entidades/Articulo.java</file>
@@ -15,6 +16,7 @@
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/ui/FormularioOrden.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/ui/Main.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/entidades/Proveedor.java</file>
+            <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/persistencias/RelacionDAO.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/utilerias/HibernateUtil.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/mx/itson/benito/persistencias/ArticuloDAO.java</file>
             <file>file:/C:/Users/enri0/OneDrive/Documents/Repositorios/Benito/Benito/src/hibernate.cfg.xml</file>

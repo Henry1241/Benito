@@ -61,7 +61,7 @@ public class ListaOrden extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Proveedor", "Folio", "Articulo", "Fecha", "Cantidad", "SubTotal", "Total"
+                "id", "Proveedor", "Folio", "Fecha", "Cantidad", "Articulo", "SubTotal", "Total"
             }
         ) {
             Class[] types = new Class [] {
@@ -131,7 +131,7 @@ public class ListaOrden extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         cargar();
-        
+
         tblOrden.removeColumn(tblOrden.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
@@ -139,7 +139,7 @@ public class ListaOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
         FormularioOrden formulario = new FormularioOrden(this, true, 0);
         formulario.setVisible(true);
-        
+
         cargar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -147,7 +147,7 @@ public class ListaOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
         int renglon = tblOrden.getSelectedRow();
         int id = Integer.parseInt(tblOrden.getModel().getValueAt(renglon, 0).toString());
-        
+
         CompraDAO.eliminar(id);
         cargar();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -156,19 +156,22 @@ public class ListaOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
         int renglon = tblOrden.getSelectedRow();
         int id = Integer.parseInt(tblOrden.getModel().getValueAt(renglon, 0).toString());
-        
+
         FormularioOrden formulario = new FormularioOrden(this, true, id);
         formulario.setVisible(true);
         cargar();
     }//GEN-LAST:event_btnEditarActionPerformed
-
+    
     public void cargar() {
+        Articulo idArticulo = new Articulo();
         double subtotal = 0.0;
         double iva = 0.0;
         double total;
         List<Compra> orden = CompraDAO.obtenerTodos();
-        subtotal += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*orden.get(NORMAL).getCantidad();
-        iva += orden.get(NORMAL).getIdArticulo().get(NORMAL).getPrecio()*0.16*(orden.get(NORMAL).getCantidad());
+        List<Relacion> relacion = RelacionDAO.obtenerTodos();
+            for (Relacion r : relacion) {
+        subtotal += orden.get(NORMAL).getIdArticulo().get(idArticulo.getId()).getPrecio() * orden.get(NORMAL).getCantidad();
+        iva += orden.get(NORMAL).getIdArticulo().get(idArticulo.getId()).getPrecio() * 0.16 * (orden.get(NORMAL).getCantidad());
         total = subtotal + iva;
         DefaultTableModel model = (DefaultTableModel) tblOrden.getModel();
         model.setRowCount(0);
@@ -180,14 +183,16 @@ public class ListaOrden extends javax.swing.JFrame {
                 o.getId(),
                 o.getIdProveedor().getNombre(),
                 o.getFolio(),
-                o.getIdArticulo().get(NORMAL).getNombre(),
                 formatoFecha.format(o.getFecha()),
                 o.getCantidad(),
+                o.getIdArticulo(),
                 formatoMoneda.format(subtotal),
                 formatoMoneda.format(total)
-            });      
+            });
         }
     }
+    }
+
     /**
      * @param args the command line arguments
      */

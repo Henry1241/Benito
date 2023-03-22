@@ -9,9 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionListener;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencias.ArticuloDAO;
@@ -159,14 +157,14 @@ public class FormularioOrden extends javax.swing.JDialog {
         try {
             Proveedor proveedor = (Proveedor) cmbProveedor.getSelectedItem();
             String folio = txtFolio.getText();
-            List<Articulo> idArticulo = (List<Articulo>) (Articulo) cmbArticulo.getSelectedItem();
+            Articulo idArticulo =(Articulo) cmbArticulo.getSelectedItem();
             Date fecha = new SimpleDateFormat("yyyy MM, d", Locale.ENGLISH).parse(txtFecha.getText());
             int cantidad = (int) spnCantidad.getValue();
             
              boolean resultado = this.id == 0 ?
             
-            CompraDAO.guardar(proveedor, folio, idArticulo, fecha, cantidad):
-            CompraDAO.editar(id, proveedor, folio, idArticulo, fecha, cantidad);
+            CompraDAO.guardar(proveedor, folio, idArticulo.getClass().cast(idArticulo.getId()), fecha, cantidad):
+            CompraDAO.editar(id, proveedor, folio, idArticulo.getClass().cast(CompraDAO.obtenerPorIdArticulo(idArticulo.getId())), fecha, cantidad);
             
         if(resultado){
             JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
