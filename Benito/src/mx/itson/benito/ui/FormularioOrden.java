@@ -31,6 +31,8 @@ public class FormularioOrden extends javax.swing.JDialog {
     public FormularioOrden(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        this.id = id;
+        
         if (id != 0) {
             Compra compra = new Compra();
 
@@ -162,8 +164,10 @@ public class FormularioOrden extends javax.swing.JDialog {
         // Datos a guardar dentro del formulario usando un boton
         try {
             Proveedor proveedor = (Proveedor) cmbProveedor.getSelectedItem();
+            System.out.println("El conductor seleccionado es: " + proveedor.getId());
             String folio = txtFolio.getText();
             Articulo idArticulo =(Articulo) cmbArticulo.getSelectedItem();
+            System.out.println("El conductor seleccionado es: " + idArticulo.getId());
             Date fecha = new SimpleDateFormat("yyyy MM, d", Locale.ENGLISH).parse(txtFecha.getText());
             int cantidad = (int) spnCantidad.getValue();
             
