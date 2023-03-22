@@ -9,7 +9,7 @@ import mx.itson.benito.persistencias.RelacionDAO;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class Main {
 

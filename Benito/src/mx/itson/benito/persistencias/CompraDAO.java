@@ -18,7 +18,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class CompraDAO {
     
@@ -42,7 +42,15 @@ public class CompraDAO {
         }
         return compra;
     }
-
+/**
+ * 
+ * @param idProveedor
+ * @param folio
+ * @param idArticulo
+ * @param fecha
+ * @param cantidad
+ * @return 
+ */
     public static boolean guardar(Proveedor idProveedor, String folio, Articulo idArticulo, Date fecha, int cantidad) {
         boolean resultado = false;
         try {
@@ -52,7 +60,7 @@ public class CompraDAO {
             Compra c = new Compra();
             c.setIdProveedor(idProveedor);
             c.setFolio(folio);
-            c.setIdArticulo((List<Articulo>) idArticulo);
+            c.setIdArticulo(idArticulo);
             c.setFecha(fecha);
             c.setCantidad(cantidad);
 
@@ -66,7 +74,11 @@ public class CompraDAO {
         }
         return resultado;
     }
-
+/**
+ * 
+ * @param id
+ * @return 
+ */
     public static Compra obtenerPorId(int id) {
         Compra ordenCompra = null;
         try {
@@ -77,6 +89,16 @@ public class CompraDAO {
         }
         return ordenCompra;
     }
+    /**
+     * 
+     * @param id
+     * @param idProveedor
+     * @param folio
+     * @param idArticulo
+     * @param fecha
+     * @param cantidad
+     * @return 
+     */
     public static boolean editar(int id, Proveedor idProveedor, String folio, Articulo idArticulo, Date fecha, int cantidad){
         boolean resultado = false;
         try {
@@ -87,7 +109,7 @@ public class CompraDAO {
             if(compra != null){
                 compra.setIdProveedor(idProveedor);
                 compra.setFolio(folio);
-                compra.setIdArticulo((List<Articulo>) idArticulo);
+                compra.setIdArticulo(idArticulo);
                 compra.setFecha(fecha);
                 compra.setCantidad(cantidad);
                 
@@ -100,6 +122,11 @@ public class CompraDAO {
         }
         return resultado;
     }
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     public static boolean eliminar(int id){
         boolean resultado = false;
         try {
@@ -119,16 +146,5 @@ public class CompraDAO {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
         return resultado;
-    }
-    
-    public static Articulo obtenerPorIdArticulo(int id) {
-        Articulo articuloNombre = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            articuloNombre = session.get(Articulo.class, id);
-        } catch (HibernateException ex) {
-            System.err.println("Ocurrio un error: " + ex.getMessage());
-        }
-        return articuloNombre;
-    }
+    }   
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import mx.itson.benito.entidades.Articulo;
+import mx.itson.benito.entidades.Compra;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencias.ArticuloDAO;
 import mx.itson.benito.persistencias.CompraDAO;
@@ -18,7 +19,7 @@ import mx.itson.benito.persistencias.ProveedorDAO;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class FormularioOrden extends javax.swing.JDialog {
 
@@ -31,10 +32,9 @@ public class FormularioOrden extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         if (id != 0) {
-            Articulo articulo = new Articulo();
+            Compra compra = new Compra();
 
-            txtFolio.setText(articulo.getClave());
-            txtFecha.setText(articulo.getNombre());
+            txtFolio.setText(compra.getFolio());
             cmbArticulo.getSelectedObjects();
             cmbProveedor.getSelectedItem();
         }
@@ -42,14 +42,20 @@ public class FormularioOrden extends javax.swing.JDialog {
         cargarProveedores();
         cargarArticulos();
     }
-
+/**
+ * Metodo que se encarga de cargar los proveedores existentes dentro del comboBox
+ * de Proveedor
+ */
     public void cargarProveedores() {
         List<Proveedor> proveedores = ProveedorDAO.obtenerTodos();
         for (Proveedor p : proveedores) {
             cmbProveedor.addItem(p);
         }
     }
-
+/**
+ * Metodo que se encarga de cargar los articulos existentes dentro del comboBox
+ * de Articulo
+ */
     public void cargarArticulos() {
         List<Articulo> articulos = ArticuloDAO.obtenerTodos();
         for (Articulo a : articulos) {
@@ -153,7 +159,7 @@ public class FormularioOrden extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        // Datos a guardar dentro del formulario usando un boton
         try {
             Proveedor proveedor = (Proveedor) cmbProveedor.getSelectedItem();
             String folio = txtFolio.getText();
@@ -163,8 +169,8 @@ public class FormularioOrden extends javax.swing.JDialog {
             
              boolean resultado = this.id == 0 ?
             
-            CompraDAO.guardar(proveedor, folio, idArticulo.getClass().cast(idArticulo.getId()), fecha, cantidad):
-            CompraDAO.editar(id, proveedor, folio, idArticulo.getClass().cast(CompraDAO.obtenerPorIdArticulo(idArticulo.getId())), fecha, cantidad);
+            CompraDAO.guardar(proveedor, folio, idArticulo, fecha, cantidad):
+            CompraDAO.editar(id, proveedor, folio, idArticulo, fecha, cantidad);
             
         if(resultado){
             JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);

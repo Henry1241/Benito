@@ -14,11 +14,12 @@ import mx.itson.benito.persistencias.ProveedorDAO;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class FormularioProveedor extends javax.swing.JDialog {
 
     int id = 0;
+
     /**
      * Creates new form FormularioProveedor
      */
@@ -26,10 +27,10 @@ public class FormularioProveedor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.id = id;
-        
-        if(id != 0){         
+
+        if (id != 0) {
             Proveedor proveedor = new Proveedor();
-            
+
             txtClave.setText(proveedor.getClave());
             txtNombre.setText(proveedor.getNombre());
             txtDireccion.setText(proveedor.getDireccion());
@@ -37,13 +38,17 @@ public class FormularioProveedor extends javax.swing.JDialog {
             txtEmail.setText(proveedor.getEmail());
             cmbArticulos.getSelectedItem();
         }
-        
+
         cargarArticulos();
     }
 
+    /**
+     * Metodo que se encarga de cargar los articulos existentes dentro del
+     * comboBox de Articulo
+     */
     public void cargarArticulos() {
         List<Articulo> articulos = ArticuloDAO.obtenerTodos();
-        for(Articulo a: articulos){
+        for (Articulo a : articulos) {
             cmbArticulos.addItem(a);
         }
     }
@@ -163,7 +168,7 @@ public class FormularioProveedor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        // Datos a guardar dentro del formulario usando un boton
         try {
             String clave = txtClave.getText();
             String nombre = txtNombre.getText();
@@ -173,17 +178,17 @@ public class FormularioProveedor extends javax.swing.JDialog {
             String contacto = txtContacto.getText();
             Articulo articulo = (Articulo) cmbArticulos.getSelectedItem();
             System.out.println("El conductor seleccionado es: " + articulo.getId());
-            
-             boolean resultado = this.id == 0 ?
-        
-        ProveedorDAO.guardar(clave, nombre, direccion, telefono, email, contacto, articulo):
-        ProveedorDAO.editar(id, clave, nombre, direccion, telefono, email, contacto, articulo);
-        
-        if(resultado){
-            JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
+
+            boolean resultado = this.id == 0
+                    ? ProveedorDAO.guardar(clave, nombre, direccion, telefono, email, contacto, articulo)
+                    : ProveedorDAO.editar(id, clave, nombre, direccion, telefono, email, contacto, articulo);
+
+            if (resultado) {
+                JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
-            }else
-            JOptionPane.showMessageDialog(this, "El registro se edito con exito", "Registro guardado", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "El registro se edito con exito", "Registro guardado", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar", "Error", JOptionPane.ERROR_MESSAGE);
         }

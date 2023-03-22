@@ -12,7 +12,7 @@ import mx.itson.benito.persistencias.ProveedorDAO;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class ListaProveedor extends javax.swing.JFrame {
 
@@ -123,37 +123,38 @@ public class ListaProveedor extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         cargar();
-        
+
         tblProveedor.removeColumn(tblProveedor.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        // Boton que da acceso al formulario para agregar una linea
         FormularioProveedor formulario = new FormularioProveedor(this, true, 0);
         formulario.setVisible(true);
-        
+
         cargar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        // Boton que da acceso al formulario para editar una linea
         int renglon = tblProveedor.getSelectedRow();
         int id = Integer.parseInt(tblProveedor.getModel().getValueAt(renglon, 0).toString());
-        
+
         FormularioProveedor formulario = new FormularioProveedor(this, true, id);
         formulario.setVisible(true);
-        
+
         cargar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        // Boton que permite eliminar una linea seleccionada por el usuario
         int renglon = tblProveedor.getSelectedRow();
         int id = Integer.parseInt(tblProveedor.getModel().getValueAt(renglon, 0).toString());
 
         ProveedorDAO.eliminar(id);
         cargar();
     }//GEN-LAST:event_btnEliminarActionPerformed
+//Metodo que permite llenar la tabla con datos existentes
 
     private void cargar() {
         List<Proveedor> proveedor = ProveedorDAO.obtenerTodos();

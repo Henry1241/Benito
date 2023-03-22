@@ -14,7 +14,7 @@ import mx.itson.benito.persistencias.ProveedorDAO;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class FormularioArticulo extends javax.swing.JDialog {
 
@@ -41,7 +41,10 @@ public class FormularioArticulo extends javax.swing.JDialog {
         
         cargarProveedores();
     }
-
+/**
+ * Metodo que se encarga de cargar los proveedores existentes dentro del comboBox
+ * de Proveedor
+ */
     public void cargarProveedores() {
         List<Proveedor> proveedores = ProveedorDAO.obtenerTodos();
         for(Proveedor p: proveedores){
@@ -133,9 +136,8 @@ public class FormularioArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        // Funcion del boton guardar del formulario
         try {
-
         String clave = txtClave.getText();
         String nombre = txtNombre.getText();
         double precio = Double.parseDouble(txtPrecio.getText());

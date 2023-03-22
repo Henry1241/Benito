@@ -16,14 +16,14 @@ import org.hibernate.Session;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class ProveedorDAO {
     
     /**
      * Conecta con Hibernate y con la base de datos MySQL para obtener datos de
      * la base de datos especifica.
-     * @return multas
+     * @return proveedores
      */
     public static List<Proveedor> obtenerTodos(){
         List<Proveedor> proveedores = new ArrayList<>();
@@ -48,7 +48,7 @@ public class ProveedorDAO {
      * @param telefono
      * @param email
      * @param contacto
-     * @param articulos
+     * @param articulo
      * @return resultado
      */
     public static boolean guardar(String clave, String nombre, String direccion, String telefono, String email, String contacto, Articulo articulo){

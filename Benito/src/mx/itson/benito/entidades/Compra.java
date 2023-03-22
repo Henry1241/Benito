@@ -15,13 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 @Entity
 public class Compra {
@@ -33,11 +34,9 @@ public class Compra {
     @JoinColumn(name = "idProveedor")
     private Proveedor idProveedor;
     private String folio;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "compra",
-            joinColumns = {@JoinColumn(name = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "idArticulo")})
-    private List<Articulo> idArticulo;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idArticulo")
+    private Articulo idArticulo;
     @Temporal(TemporalType.DATE)
     private Date fecha;
     private int cantidad;
@@ -87,14 +86,14 @@ public class Compra {
     /**
      * @return the idArticulo
      */
-    public List<Articulo> getIdArticulo() {
+    public Articulo getIdArticulo() {
         return idArticulo;
     }
 
     /**
      * @param idArticulo the idArticulo to set
      */
-    public void setIdArticulo(List<Articulo> idArticulo) {
+    public void setIdArticulo(Articulo idArticulo) {
         this.idArticulo = idArticulo;
     }
 

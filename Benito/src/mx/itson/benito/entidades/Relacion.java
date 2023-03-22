@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 @Entity
 public class Relacion {

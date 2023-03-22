@@ -6,7 +6,6 @@
 package mx.itson.benito.persistencias;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import mx.itson.benito.entidades.Articulo;
@@ -17,14 +16,14 @@ import org.hibernate.Session;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class ArticuloDAO {
     
     /**
      * Conecta con Hibernate y con la base de datos MySQL para obtener datos de
      * la base de datos especifica.
-     * @return multas
+     * @return articulos
      */
     public static List<Articulo> obtenerTodos(){
         List<Articulo> articulos = new ArrayList<>();
@@ -141,17 +140,5 @@ public class ArticuloDAO {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
         return resultado;
-    }
-    
-    public static double sumaPrecio(Articulo subtotal) {
-        double total = 0;
-
-        Articulo articulo = subtotal;
-            if(articulo != null){
-                articulo.setPrecio(total);
-            }
-                total += subtotal.getPrecio();
-            
-        return total;
     }
 }

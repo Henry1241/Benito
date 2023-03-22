@@ -11,16 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
-import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Compra;
-import mx.itson.benito.entidades.Relacion;
-import mx.itson.benito.persistencias.ArticuloDAO;
 import mx.itson.benito.persistencias.CompraDAO;
-import mx.itson.benito.persistencias.RelacionDAO;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class ListaOrden extends javax.swing.JFrame {
 
@@ -136,7 +132,7 @@ public class ListaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        // Acceso al formulario para agregar datos
         FormularioOrden formulario = new FormularioOrden(this, true, 0);
         formulario.setVisible(true);
 
@@ -144,7 +140,7 @@ public class ListaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        // Accion para eliminar una linea en la tabla
         int renglon = tblOrden.getSelectedRow();
         int id = Integer.parseInt(tblOrden.getModel().getValueAt(renglon, 0).toString());
 
@@ -153,7 +149,7 @@ public class ListaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        // Acceso al formulario para editar
         int renglon = tblOrden.getSelectedRow();
         int id = Integer.parseInt(tblOrden.getModel().getValueAt(renglon, 0).toString());
 
@@ -161,18 +157,10 @@ public class ListaOrden extends javax.swing.JFrame {
         formulario.setVisible(true);
         cargar();
     }//GEN-LAST:event_btnEditarActionPerformed
-    
+// Metodo que se encarda de cargar los datos existentes dentro de la tabla
+
     public void cargar() {
-        Articulo idArticulo = new Articulo();
-        double subtotal = 0.0;
-        double iva = 0.0;
-        double total;
         List<Compra> orden = CompraDAO.obtenerTodos();
-        List<Relacion> relacion = RelacionDAO.obtenerTodos();
-            for (Relacion r : relacion) {
-        subtotal += orden.get(NORMAL).getIdArticulo().get(idArticulo.getId()).getPrecio() * orden.get(NORMAL).getCantidad();
-        iva += orden.get(NORMAL).getIdArticulo().get(idArticulo.getId()).getPrecio() * 0.16 * (orden.get(NORMAL).getCantidad());
-        total = subtotal + iva;
         DefaultTableModel model = (DefaultTableModel) tblOrden.getModel();
         model.setRowCount(0);
         DateFormat formatoFecha = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
@@ -185,12 +173,12 @@ public class ListaOrden extends javax.swing.JFrame {
                 o.getFolio(),
                 formatoFecha.format(o.getFecha()),
                 o.getCantidad(),
-                o.getIdArticulo(),
-                formatoMoneda.format(subtotal),
-                formatoMoneda.format(total)
+                o.getIdArticulo().getNombre(),
+                formatoMoneda.format(o.getIdArticulo().getPrecio() * o.getCantidad()),
+                formatoMoneda.format(o.getIdArticulo().getPrecio() * o.getCantidad() + o.getIdArticulo().getPrecio() * 0.16 * (o.getCantidad()))
             });
         }
-    }
+
     }
 
     /**

@@ -14,11 +14,14 @@ import org.hibernate.Session;
 
 /**
  *
- * @author enri0
+ * @author Enrique Gonzalez Leyva
  */
 public class RelacionDAO {
     
-    
+    /**
+     * 
+     * @return relacion
+     */
     public static List<Relacion> obtenerTodos(){
         List<Relacion> relacion = new ArrayList<>();
         try {

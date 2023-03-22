@@ -124,31 +124,31 @@ public class ListaArticulo extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         cargar();
-        
+
         tblArticulos.removeColumn(tblArticulos.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        // Boton que da acceso al formulario para agregar una linea a la tabla
         FormularioArticulo formulario = new FormularioArticulo(this, true, 0);
         formulario.setVisible(true);
-        
+
         cargar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        // Boton que da acceso al formulario para editar una linea en la tabla
         int renglon = tblArticulos.getSelectedRow();
         int id = Integer.parseInt(tblArticulos.getModel().getValueAt(renglon, 0).toString());
-        
+
         FormularioArticulo formulario = new FormularioArticulo(this, true, id);
         formulario.setVisible(true);
-        
+
         cargar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        // Boton que permite eliminar una linea de la tabla seleccionada por el usuario
         int renglon = tblArticulos.getSelectedRow();
         int id = Integer.parseInt(tblArticulos.getModel().getValueAt(renglon, 0).toString());
 
@@ -160,7 +160,7 @@ public class ListaArticulo extends javax.swing.JFrame {
         List<Articulo> articulo = ArticuloDAO.obtenerTodos();
         DefaultTableModel model = (DefaultTableModel) tblArticulos.getModel();
         model.setRowCount(0);
-        for(Articulo a: articulo){
+        for (Articulo a : articulo) {
             model.addRow(new Object[]{
                 a.getId(),
                 a.getClave(),
@@ -170,7 +170,7 @@ public class ListaArticulo extends javax.swing.JFrame {
             });
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
