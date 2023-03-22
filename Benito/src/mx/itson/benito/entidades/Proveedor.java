@@ -143,7 +143,7 @@ public class Proveedor {
     }
 
     /**
-     * @param articulos the articulos to set
+     * @param articulo the articulo to set
      */
     public void setArticulo(Articulo articulo) {
         this.articulo = articulo;

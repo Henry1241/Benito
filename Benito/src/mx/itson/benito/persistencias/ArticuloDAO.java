@@ -42,10 +42,10 @@ public class ArticuloDAO {
     /**
      * Metodo encargado de registrar los datos que seran usados para guardar
      * una multa nueva.
-     * @param clave
-     * @param nombre
-     * @param precio
-     * @param proveedor
+     * @param clave La clave del articulo registrado
+     * @param nombre El nombre del articulo registrado
+     * @param precio El precio del articulo registrado
+     * @param proveedor El nombre del proveedor que vende el articulo
      * @return resultado
      */
     public static boolean guardar(String clave, String nombre, double precio, Proveedor proveedor){
@@ -87,11 +87,11 @@ public class ArticuloDAO {
     }
     /**
      * Metodo que se encarga de seleccionar los parametros a editar.
-     * @param id
-     * @param clave
-     * @param nombre
-     * @param precio
-     * @param proveedor
+     * @param id el identificador de la linea
+     * @param clave La clave del articulo registrado
+     * @param nombre El nombre del articulo registrado
+     * @param precio El precio del articulo registrado
+     * @param proveedor El nombre del proveedor que vende el articulo
      * @return resultado
      */
     public static boolean editar(int id, String clave, String nombre, double precio, Proveedor proveedor){
@@ -118,7 +118,7 @@ public class ArticuloDAO {
     }
     /**
      * Metodo que se encarga de eliminar usando el id como referencia.
-     * @param id
+     * @param id el identificador de la linea
      * @return resultado
      */
     public static boolean eliminar(int id){

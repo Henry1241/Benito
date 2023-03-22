@@ -42,13 +42,13 @@ public class ProveedorDAO {
     /**
      * Metodo encargado de registrar los datos que seran usados para guardar
      * una multa nueva.
-     * @param clave
-     * @param nombre
-     * @param direccion
-     * @param telefono
-     * @param email
-     * @param contacto
-     * @param articulo
+     * @param clave Es la clave del proveedor registrado en la empresa
+     * @param nombre Es el nombre del proveedor registrado en la empresa
+     * @param direccion Es la direccion que la empresa tiene del proveedor
+     * @param telefono Es el telefono que la empresa tiene del proveedor
+     * @param email Es el correo electronico que la empresa tiene del proveedor
+     * @param contacto Es el contacto que la empresa tiene del proveedor
+     * @param articulo Es el articulo(s) que la empresa obtiene del proveedor
      * @return resultado
      */
     public static boolean guardar(String clave, String nombre, String direccion, String telefono, String email, String contacto, Articulo articulo){
@@ -93,14 +93,14 @@ public class ProveedorDAO {
     }
     /**
      * Metodo que se encarga de seleccionar los parametros a editar.
-     * @param id
-     * @param clave
-     * @param nombre
-     * @param direccion
-     * @param telefono
-     * @param email
-     * @param contacto
-     * @param articulo
+     * @param id Es el identificador en la tabla del proveedor
+     * @param clave Es la clave del proveedor registrado en la empresa
+     * @param nombre Es el nombre del proveedor registrado en la empresa
+     * @param direccion Es la direccion que la empresa tiene del proveedor
+     * @param telefono Es el telefono que la empresa tiene del proveedor
+     * @param email Es el correo electronico que la empresa tiene del proveedor
+     * @param contacto Es el contacto que la empresa tiene del proveedor
+     * @param articulo Es el articulo(s) que la empresa obtiene del proveedor
      * @return resultado
      */
     public static boolean editar(int id, String clave, String nombre, String direccion, String telefono, String email, String contacto, Articulo articulo){
