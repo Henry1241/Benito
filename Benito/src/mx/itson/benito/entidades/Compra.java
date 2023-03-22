@@ -6,19 +6,16 @@
 package mx.itson.benito.entidades;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import mx.itson.benito.enumeradores.Estado;
 
 /**
  *
@@ -40,6 +37,7 @@ public class Compra {
     @Temporal(TemporalType.DATE)
     private Date fecha;
     private int cantidad;
+    private int estado;
 
     /**
      * @return the id
@@ -123,6 +121,21 @@ public class Compra {
      */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    /**
+     * @return the estado
+     */
+    public int getEstado() {
+        return estado;
+    }
+
+    /**
+     * 
+     * @param estado 
+     */
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
     
 }

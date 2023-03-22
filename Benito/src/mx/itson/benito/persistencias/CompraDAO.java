@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Compra;
 import mx.itson.benito.entidades.Proveedor;
+import mx.itson.benito.enumeradores.Estado;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

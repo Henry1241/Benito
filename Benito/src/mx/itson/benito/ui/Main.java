@@ -5,6 +5,7 @@
  */
 package mx.itson.benito.ui;
 
+import mx.itson.benito.persistencias.CompraDAO;
 import mx.itson.benito.persistencias.RelacionDAO;
 
 /**
@@ -18,7 +19,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        RelacionDAO.obtenerTodos();
+        CompraDAO.obtenerTodos();
     }
     
 }
